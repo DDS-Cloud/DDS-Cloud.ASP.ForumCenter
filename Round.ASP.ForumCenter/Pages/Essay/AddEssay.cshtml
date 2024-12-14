@@ -1,0 +1,39 @@
+﻿@page
+@using Round.ASP.ForumCenter.Models.Config
+@model Round.ASP.ForumCenter.Pages.Essay.AddEssayModel
+@{
+    ViewData["Title"] = "新建文章";
+}
+
+<script>
+    function sendData() {
+        const inputField = document.getElementById('dataInput');
+        const tit = document.getElementById('tit');
+        const data = inputField.value;
+        const tits = tit.value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://@ConfigCore.MainConfig.Host:@ConfigCore.MainConfig.APIPort', true);
+        xhr.onloadend = function () {
+            console.log('Server response:', xhr.responseText);
+        };
+        xhr.send('data={"type":"AddEssay","UUID":"@Model.uuid","Mess":"' + data + '","Title":"' + tits + '"}');
+        window.location.href = '/User/Individual?uuid=@Model.uuid';
+    }
+</script>
+<style>
+    /* 样式可以根据您的需求进行调整 */
+    .text-editor {
+        width:100%;
+        height: 200px;
+        font-family: Arial, sans-serif;
+        padding: 10px;
+        box-sizing: border-box;
+        margin-top:10px;
+    }
+</style>
+
+<h1>投稿文章</h1>
+<input type="text" id="tit" placeholder="文章标题" style="width:100%;" />
+<textarea type="text" id="dataInput" placeholder="在此处输入你的文章内容..." class="text-editor"></textarea>
+<button onclick="sendData()">投稿</button>

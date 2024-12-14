@@ -1,0 +1,17 @@
+{
+  "UserConfig": [
+    {
+      "UserName": "3481572326@qq.com",
+      "UserPassword": "111",
+      "UserEmail": "3481572326@qq.com",
+      "UUID": "KsJ2vufyP5CYQTSh0bK",
+      "DSID": "0"
+    }
+  ],
+  "UserCount": 1,
+  "EMail": "dds_server@qq.com",
+  "EmailToken": "tufbumbflsoeijac",
+  "EmailServer": "smtp.qq.com",
+  "APIPort": 12345,
+  "Host": "localhost"
+}

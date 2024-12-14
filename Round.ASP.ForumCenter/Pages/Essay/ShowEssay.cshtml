@@ -1,0 +1,41 @@
+﻿@page
+@model Round.ASP.ForumCenter.Pages.Essay.ShowEssayModel
+@{
+    ViewData["Title"] = Models.Config.Essay.GetEssayForESID(Model.esid).MessTitle;
+}
+<style>
+    .textarea-autoresize {
+        width: 100%; /* 宽度100% */
+        height: auto; /* 高度自动 */
+        min-height: 50px; /* 最小高度 */
+        border: none; /* 无边框 */
+        outline: none; /* 无轮廓线 */
+        resize: none; /* 禁止调整大小 */
+        overflow-y: hidden; /* 隐藏垂直滚动条 */
+        padding: 10px; /* 内边距 */
+        box-sizing: border-box; /* 盒模型 */
+        white-space: pre-wrap; /* 保持空白符，自动换行 */
+        word-wrap: break-word; /* 长单词或URL自动换行 */
+    }
+</style>
+
+<h1>@Models.Config.Essay.GetEssayForESID(Model.esid).MessTitle</h1>
+<textarea class="textarea-autoresize">@Models.Config.Essay.GetEssayForESID(Model.esid).MessMessage</textarea>
+
+<script>
+    // 自适应高度的函数
+    function autoResize() {
+        this.style.height = 'auto'; // 重置高度
+        this.style.height = (this.scrollHeight) + 'px'; // 设置新的高度
+    }
+
+    // 初始化时调整大小
+    document.addEventListener('DOMContentLoaded', function () {
+        var textareas = document.querySelectorAll('.textarea-autoresize');
+        textareas.forEach(function (textarea) {
+            textarea.addEventListener('input', autoResize);
+            autoResize.call(textarea); // 首次调整大小
+            textarea.readOnly = true; // 设置为只读
+        });
+    });
+</script>

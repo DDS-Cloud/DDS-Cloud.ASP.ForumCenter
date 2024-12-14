@@ -1,0 +1,32 @@
+﻿@page
+@using Round.ASP.ForumCenter.Models.Config
+@model IndexModel
+@{
+    ViewData["Title"] = "主页";
+}
+
+<h1>等灯云 - 讨论中心</h1>
+
+@if (Model.uuid != null)
+{
+    <a href="/User/Individual?uuid=@Model.uuid"><button>个人主页</button></a>
+}
+else
+{
+    <a href="/User/Login"><button>登录账户</button></a>
+    <a href="/User/Register"><button>注册账户</button></a>
+}
+
+<h4>推荐文章</h4>
+<ul>
+    @foreach(var it in OneUserConfig.GetRandomEssay(20))
+    {
+        <li style="margin:10px;">
+            <div style="height:80px;background-color:aliceblue;border-radius:11px;">
+                <h4 style="margin-left:10px;margin-top:10px;">@it.MessTitle</h4>
+                <a href="/Essay/ShowEssay?esid=@it.ESID"><button style="margin-left:10px;">查看</button></a>
+                <label>发布日期：@it.CreatTime</label>
+            </div>
+        </li>
+    }
+</ul>

@@ -1,0 +1,29 @@
+﻿@page
+@using Round.ASP.ForumCenter.Models.Config
+@using Round.ASP.ForumCenter.Models.User
+@model Round.ASP.ForumCenter.Pages.User.IndividualModel
+@{
+    ViewData["Title"] = "个人";
+}
+
+<h1>个人主页</h1>
+<h4>您好！@UserCore.GetUserConfigForUUID(Model.uuid).UserName</h4>
+<a href="/Index?uuid=@Model.uuid"><button>返回主页</button></a>
+<a href="/Index?uuid=@Model.uuid"><button>个人设置</button></a>
+<a href="/Essay/AddEssay?uuid=@Model.uuid"><button>添加文章</button></a>
+
+<h5>您的文章：</h5>
+<ul>
+    @foreach(var it in @OneUserConfig.GetUserConfig(Model.uuid).Essay)
+    {
+        <li style="margin:10px;">
+            <div style="height:80px;background-color:aliceblue;border-radius:11px;">
+                <h4 style="margin-left:10px;margin-top:10px;">@it.MessTitle</h4>
+                <button style="margin-left:10px;">编辑</button>
+                <a href="/Essay/ShowEssay?esid=@it.ESID"><button>查看</button></a>
+                <button>删除</button>
+                <label>发布日期：@it.CreatTime</label>
+            </div>
+        </li>
+    }
+</ul>
